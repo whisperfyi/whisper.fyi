@@ -43,6 +43,7 @@ UI_TITLE = os.environ.get("UI_TITLE") or "Contoso"
 UI_LOGO = os.environ.get("UI_LOGO")
 UI_CHAT_LOGO = os.environ.get("UI_CHAT_LOGO")
 UI_CHAT_TITLE = os.environ.get("UI_CHAT_TITLE") or "Start chatting"
+UI_ANSWER_DISCLAIMER = os.environ.get("UI_ANSWER_DISCLAIMER") or "Double check. Whisper isn't always right"
 UI_CHAT_DESCRIPTION = (
     os.environ.get("UI_CHAT_DESCRIPTION")
     or "This chatbot is configured to answer your questions"
@@ -836,7 +837,7 @@ async def send_chat_request(request_body, request_headers):
     for message in messages:
         if message.get("role") != 'tool':
             filtered_messages.append(message)
-            
+
     request_body['messages'] = filtered_messages
     model_args = prepare_model_args(request_body, request_headers)
 
@@ -844,7 +845,7 @@ async def send_chat_request(request_body, request_headers):
         azure_openai_client = init_openai_client()
         raw_response = await azure_openai_client.chat.completions.with_raw_response.create(**model_args)
         response = raw_response.parse()
-        apim_request_id = raw_response.headers.get("apim-request-id") 
+        apim_request_id = raw_response.headers.get("apim-request-id")
     except Exception as e:
         logging.exception("Exception in send_chat_request")
         raise e
@@ -868,7 +869,7 @@ async def complete_chat_request(request_body, request_headers):
 async def stream_chat_request(request_body, request_headers):
     response, apim_request_id = await send_chat_request(request_body, request_headers)
     history_metadata = request_body.get("history_metadata", {})
-    
+
     async def generate():
         async for completionChunk in response:
             yield format_stream_response(completionChunk, history_metadata, apim_request_id)

@@ -4,7 +4,7 @@ import { Dialog, Stack, TextField } from '@fluentui/react'
 import { CopyRegular } from '@fluentui/react-icons'
 
 import { CosmosDBStatus } from '../../api'
-import Contoso from '../../assets/Contoso.svg'
+import logo from '../../assets/logo.png'
 import { HistoryButton, ShareButton } from '../../components/common/Button'
 import { AppStateContext } from '../../state/AppProvider'
 
@@ -45,7 +45,7 @@ const Layout = () => {
     }
   }, [copyClicked])
 
-  useEffect(() => {}, [appStateContext?.state.isCosmosDBAvailable.status])
+  useEffect(() => { }, [appStateContext?.state.isCosmosDBAvailable.status])
 
   useEffect(() => {
     const handleResize = () => {
@@ -71,9 +71,8 @@ const Layout = () => {
       <header className={styles.header} role={'banner'}>
         <Stack horizontal verticalAlign="center" horizontalAlign="space-between">
           <Stack horizontal verticalAlign="center">
-            <img src={ui?.logo ? ui.logo : Contoso} className={styles.headerIcon} aria-hidden="true" alt="" />
             <Link to="/" className={styles.headerTitleContainer}>
-              <h1 className={styles.headerTitle}>{ui?.title} - test</h1>
+              <img src={ui?.logo ? ui.logo : logo} className={styles.headerIcon} aria-hidden="true" alt="" />
             </Link>
           </Stack>
           <Stack horizontal tokens={{ childrenGap: 4 }} className={styles.shareButtonContainer}>

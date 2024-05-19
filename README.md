@@ -13,6 +13,17 @@ This repo contains sample code for a simple chat webapp that integrates with Azu
 
 ## Deploy the app
 
+### Deploy
+
+Update build
+`start.sh`
+Push to sync'd repo
+`git push azure main`
+
+--------
+
+THIS INFORMATION IS FROM UPSTREAM
+
 ### Deploy with Azure Developer CLI
 Please see [README_azd.md](./README_azd.md) for detailed instructions.
 
@@ -27,7 +38,7 @@ Please see the [section below](#add-an-identity-provider) for important informat
 
 #### Local Setup: Basic Chat Experience
 1. Copy `.env.sample` to a new file called `.env` and configure the settings as described in the [Environment variables](#environment-variables) section.
-    
+
     These variables are required:
     - `AZURE_OPENAI_RESOURCE`
     - `AZURE_OPENAI_MODEL`
@@ -49,7 +60,7 @@ Please see the [section below](#add-an-identity-provider) for important informat
 #### Local Setup: Chat with your data (Preview)
 [More information about Azure OpenAI on your data](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/use-your-data)
 
-1. Update the `AZURE_OPENAI_*` environment variables as described above. 
+1. Update the `AZURE_OPENAI_*` environment variables as described above.
 2. To connect to your data, you need to specify an Azure Cognitive Search index to use. You can [create this index yourself](https://learn.microsoft.com/en-us/azure/search/search-get-started-portal) or use the [Azure AI Studio](https://oai.azure.com/portal/chat) to create the index for you.
 
     These variables are required when adding your data with Azure AI Search:
@@ -76,7 +87,7 @@ Please see the [section below](#add-an-identity-provider) for important informat
 4. You can see the local running app at http://127.0.0.1:50505.
 
 #### Local Setup: Enable Chat History
-To enable chat history, you will need to set up CosmosDB resources. The ARM template in the `infrastructure` folder can be used to deploy an app service and a CosmosDB with the database and container configured. Then specify these additional environment variables: 
+To enable chat history, you will need to set up CosmosDB resources. The ARM template in the `infrastructure` folder can be used to deploy an app service and a CosmosDB with the database and container configured. Then specify these additional environment variables:
 - `AZURE_COSMOSDB_ACCOUNT`
 - `AZURE_COSMOSDB_DATABASE`
 - `AZURE_COSMOSDB_CONVERSATIONS_CONTAINER`
@@ -104,9 +115,9 @@ If you've deployed the app previously, first run this command to update the apps
 
 `az webapp config appsettings set -g <resource-group-name> -n <existing-app-name> --settings WEBSITE_WEBDEPLOY_USE_SCM=false`
 
-Check the runtime stack for your app by viewing the app service resource in the Azure Portal. If it shows "Python - 3.10", use `PYTHON:3.10` in the runtime argument below. If it shows "Python - 3.11", use `PYTHON:3.11` in the runtime argument below. 
+Check the runtime stack for your app by viewing the app service resource in the Azure Portal. If it shows "Python - 3.10", use `PYTHON:3.10` in the runtime argument below. If it shows "Python - 3.11", use `PYTHON:3.11` in the runtime argument below.
 
-Check the SKU in the same way. Use the abbreviated SKU name in the argument below, e.g. for "Basic (B1)" the SKU is `B1`. 
+Check the SKU in the same way. Use the abbreviated SKU name in the argument below, e.g. for "Basic (B1)" the SKU is `B1`.
 
 Then, use these commands to deploy your local code to the existing app:
 
@@ -120,11 +131,11 @@ Deployment will take several minutes. When it completes, you should be able to n
 ### Add an identity provider
 After deployment, you will need to add an identity provider to provide authentication support in your app. See [this tutorial](https://learn.microsoft.com/en-us/azure/app-service/scenario-secure-app-authentication-app-service) for more information.
 
-If you don't add an identity provider, the chat functionality of your app will be blocked to prevent unauthorized access to your resources and data. 
+If you don't add an identity provider, the chat functionality of your app will be blocked to prevent unauthorized access to your resources and data.
 
 To remove this restriction, you can add `AUTH_ENABLED=False` to the environment variables. This will disable authentication and allow anyone to access the chat functionality of your app. **This is not recommended for production apps.**
 
-To add further access controls, update the logic in `getUserInfoList` in `frontend/src/pages/chat/Chat.tsx`. 
+To add further access controls, update the logic in `getUserInfoList` in `frontend/src/pages/chat/Chat.tsx`.
 
 ### Common Customization Scenarios (e.g. updating the default chat logo and headers)
 
@@ -162,10 +173,10 @@ When using your own data with a vector index, ensure these settings are configur
 The Citation panel is defined at the end of `frontend/src/pages/chat/Chat.tsx`. The citations returned from Azure OpenAI On Your Data will include `content`, `title`, `filepath`, and in some cases `url`. You can customize the Citation section to use and display these as you like. For example, the title element is a clickable hyperlink if `url` is not a blob URL.
 
 ```
-    <h5 
-        className={styles.citationPanelTitle} 
-        tabIndex={0} 
-        title={activeCitation.url && !activeCitation.url.includes("blob.core") ? activeCitation.url : activeCitation.title ?? ""} 
+    <h5
+        className={styles.citationPanelTitle}
+        tabIndex={0}
+        title={activeCitation.url && !activeCitation.url.includes("blob.core") ? activeCitation.url : activeCitation.title ?? ""}
         onClick={() => onViewSource(activeCitation)}
     >{activeCitation.title}</h5>
 
@@ -252,9 +263,9 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-When contributing to this repository, please help keep the codebase clean and maintainable by running 
-the formatter and linter with `npm run format` this will run `npx eslint --fix` and `npx prettier --write` 
-on the frontebnd codebase. 
+When contributing to this repository, please help keep the codebase clean and maintainable by running
+the formatter and linter with `npm run format` this will run `npx eslint --fix` and `npx prettier --write`
+on the frontebnd codebase.
 
 If you are using VSCode, you can add the following settings to your `settings.json` to format and lint on save:
 
@@ -270,8 +281,8 @@ If you are using VSCode, you can add the following settings to your `settings.js
 
 ## Trademarks
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft
+trademarks or logos is subject to and must follow
 [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
 Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
 Any use of third-party trademarks or logos are subject to those third-party's policies.
