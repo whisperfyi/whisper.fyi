@@ -263,7 +263,7 @@ export const Answer = ({ answer, onCitationClicked }: Props) => {
             </Stack.Item>
             {answer.answer !== 'Generating answer...' ? (
               <Stack.Item>
-                <button className={styles.copyButton} onClick={() => navigator.clipboard.writeText(parsedAnswer.markdownFormatText.replace(/ \^\d+\^/gm, ""))}>
+                <button className={styles.copyButton} onClick={() => navigator.clipboard.writeText(parsedAnswer.markdownFormatText.replace(/  \^\d+\^ /gm, ""))}>
                   Copy
                 </button>
               </Stack.Item>
