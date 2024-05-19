@@ -246,7 +246,7 @@ export const Answer = ({ answer, onCitationClicked }: Props) => {
   return (
     <>
       <Stack className={styles.answerContainer} tabIndex={0}>
-        <Stack.Item>
+        <Stack.Item grow>
           <Stack horizontal grow>
             <Stack.Item grow>
               <ReactMarkdown
@@ -261,11 +261,13 @@ export const Answer = ({ answer, onCitationClicked }: Props) => {
                 components={components}
               />
             </Stack.Item>
-            <Stack.Item>
-              <button className={styles.copyButton} onClick={() => navigator.clipboard.writeText(parsedAnswer.markdownFormatText)}>
-                Copy
-              </button>
-            </Stack.Item>
+            {answer.answer !== 'Generating answer...' ? (
+              <Stack.Item>
+                <button className={styles.copyButton} onClick={() => navigator.clipboard.writeText(parsedAnswer.markdownFormatText)}>
+                  Copy
+                </button>
+              </Stack.Item>
+            ) : null}
             <Stack.Item className={styles.answerHeader}>
               {FEEDBACK_ENABLED && answer.message_id !== undefined && (
                 <Stack horizontal horizontalAlign="space-between">
