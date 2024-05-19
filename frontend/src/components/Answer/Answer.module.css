@@ -61,6 +61,20 @@
   flex-grow: 0;
 }
 
+.copyButton {
+  border: 1px solid rgb(236, 236, 236);
+  background: white;
+  font-size: 12px;
+  border-radius: 8px;
+  box-shadow: 4px 4px 6px rgb(236, 236, 236);
+}
+
+.copyButton:hover {
+  background: linear-gradient(135deg, #0f6cbd 0%, #2d87c3 51.04%, #8dddd8 100%);
+  color: white;
+  cursor: pointer;
+}
+
 .citationWrapper {
   margin-top: 8;
   display: flex;

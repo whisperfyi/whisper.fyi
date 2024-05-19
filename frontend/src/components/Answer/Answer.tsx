@@ -262,7 +262,7 @@ export const Answer = ({ answer, onCitationClicked }: Props) => {
               />
             </Stack.Item>
             <Stack.Item>
-              <button className={styles.chatButton} onClick={() => navigator.clipboard.writeText(parsedAnswer.markdownFormatText)}>
+              <button className={styles.copyButton} onClick={() => navigator.clipboard.writeText(parsedAnswer.markdownFormatText)}>
                 Copy
               </button>
             </Stack.Item>
