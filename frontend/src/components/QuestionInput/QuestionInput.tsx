@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Stack, TextField } from '@fluentui/react'
 import { SendRegular } from '@fluentui/react-icons'
 
@@ -12,10 +12,22 @@ interface Props {
   placeholder?: string
   clearOnSend?: boolean
   conversationId?: string
+  quickSend?: string
 }
 
-export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, conversationId }: Props) => {
+export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, conversationId, quickSend }: Props) => {
   const [question, setQuestion] = useState<string>('')
+
+  useEffect(() => {
+    if (quickSend) {
+      setQuestion(quickSend)
+      if (conversationId) {
+        onSend(quickSend, conversationId)
+      } else {
+        onSend(quickSend)
+      }
+    }
+  }, [quickSend])
 
   const sendQuestion = () => {
     if (disabled || !question.trim()) {

@@ -110,6 +110,10 @@ export type UI = {
 	chat_logo?: string
 	show_share_button?: boolean
 	answer_disclaimer?: string
+	conversation_starter_1?: string
+	conversation_starter_2?: string
+	conversation_starter_3?: string
+	conversation_starter_4?: string
 }
 
 export type FrontendSettings = {

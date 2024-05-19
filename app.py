@@ -39,17 +39,22 @@ MINIMUM_SUPPORTED_AZURE_OPENAI_PREVIEW_API_VERSION = "2024-02-15-preview"
 load_dotenv()
 
 # UI configuration (optional)
-UI_TITLE = os.environ.get("UI_TITLE") or "Contoso"
+UI_TITLE = os.environ.get("UI_TITLE") or "Whisper FYI"
 UI_LOGO = os.environ.get("UI_LOGO")
 UI_CHAT_LOGO = os.environ.get("UI_CHAT_LOGO")
-UI_CHAT_TITLE = os.environ.get("UI_CHAT_TITLE") or "Start chatting"
+UI_CHAT_TITLE = os.environ.get("UI_CHAT_TITLE") or "Welcome to your SafeSeizure Sales Assistant"
 UI_ANSWER_DISCLAIMER = os.environ.get("UI_ANSWER_DISCLAIMER") or "Double check. Whisper isn't always right"
 UI_CHAT_DESCRIPTION = (
     os.environ.get("UI_CHAT_DESCRIPTION")
-    or "This chatbot is configured to answer your questions"
+    or "How can I help you?"
 )
 UI_FAVICON = os.environ.get("UI_FAVICON") or "/favicon.ico"
 UI_SHOW_SHARE_BUTTON = os.environ.get("UI_SHOW_SHARE_BUTTON", "true").lower() == "true"
+
+UI_CONVERSATION_STARTER_1 = os.environ.get("UI_CONVERSATION_STARTER_1") or "Help me write an email"
+UI_CONVERSATION_STARTER_2 = os.environ.get("UI_CONVERSATION_STARTER_2") or "Who are my call points?"
+UI_CONVERSATION_STARTER_3 = os.environ.get("UI_CONVERSATION_STARTER_3") or "Why is it single-patient use?"
+UI_CONVERSATION_STARTER_4 = os.environ.get("UI_CONVERSATION_STARTER_4") or "Give me the TOP 5 features"
 
 
 def create_app():
@@ -266,6 +271,11 @@ frontend_settings = {
         "chat_title": UI_CHAT_TITLE,
         "chat_description": UI_CHAT_DESCRIPTION,
         "show_share_button": UI_SHOW_SHARE_BUTTON,
+        "answer_disclaimer": UI_ANSWER_DISCLAIMER,
+        "conversation_starter_1": UI_CONVERSATION_STARTER_1,
+        "conversation_starter_2": UI_CONVERSATION_STARTER_2,
+        "conversation_starter_3": UI_CONVERSATION_STARTER_3,
+        "conversation_starter_4": UI_CONVERSATION_STARTER_4,
     },
     "sanitize_answer": SANITIZE_ANSWER,
 }
