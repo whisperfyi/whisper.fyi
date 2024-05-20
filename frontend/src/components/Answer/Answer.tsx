@@ -68,6 +68,7 @@ export const Answer = ({ answer, onCitationClicked }: Props) => {
   }, [appStateContext?.state.feedbackState, feedbackState, answer.message_id])
 
   const createCitationFilepath = (citation: Citation, index: number, truncate: boolean = false) => {
+    console.dir(citation)
     let citationFilename = ''
 
     if (citation.filepath) {

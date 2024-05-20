@@ -13,19 +13,20 @@ interface Props {
   clearOnSend?: boolean
   conversationId?: string
   quickSend?: string
+  clearQuickSend?: () => void
 }
 
-export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, conversationId, quickSend }: Props) => {
+export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, conversationId, quickSend, clearQuickSend }: Props) => {
   const [question, setQuestion] = useState<string>('')
 
   useEffect(() => {
     if (quickSend) {
-      setQuestion(quickSend)
       if (conversationId) {
         onSend(quickSend, conversationId)
       } else {
         onSend(quickSend)
       }
+      clearQuickSend?.()
     }
   }, [quickSend])
 

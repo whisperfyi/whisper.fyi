@@ -872,6 +872,7 @@ const Chat = () => {
               </Stack>
               <QuestionInput
                 quickSend={quickSend}
+                clearQuickSend={() => setQuickSend("")}
                 clearOnSend
                 placeholder="Type a new question..."
                 disabled={isLoading}
