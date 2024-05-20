@@ -908,14 +908,14 @@ const Chat = () => {
                 </Stack>
                 <h5
                   className={styles.citationPanelTitle}
-                  tabIndex={0}
                   title={
                     activeCitation.url && !activeCitation.url.includes('blob.core')
                       ? activeCitation.url
                       : activeCitation.title ?? ''
-                  }
-                  onClick={() => onViewSource(activeCitation)}>
-                  {activeCitation.title}
+                  }>
+                  <button className={styles.chatButton} onClick={() => onViewSource(activeCitation)}>
+                    {activeCitation.title}
+                  </button>
                 </h5>
                 <div tabIndex={0}>
                   <ReactMarkdown
