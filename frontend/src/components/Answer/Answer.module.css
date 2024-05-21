@@ -75,6 +75,10 @@
   cursor: pointer;
 }
 
+.copyButton:hover>img {
+  filter: brightness(0) saturate(100%) invert(100%) hue-rotate(267deg) brightness(105%) contrast(103%);
+}
+
 .citationWrapper {
   margin-top: 8;
   display: flex;
