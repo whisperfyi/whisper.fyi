@@ -12,6 +12,7 @@ import supersub from 'remark-supersub'
 import { AskResponse, Citation, Feedback, historyMessageFeedback } from '../../api'
 import { XSSAllowTags } from '../../constants/xssAllowTags'
 import { AppStateContext } from '../../state/AppProvider'
+import copy from '../../assets/copy.png'
 
 import { parseAnswer } from './AnswerParser'
 
@@ -30,6 +31,8 @@ export const Answer = ({ answer, onCitationClicked }: Props) => {
     if (Object.values(Feedback).includes(answer.feedback)) return answer.feedback
     return Feedback.Neutral
   }
+
+  console.dir(answer)
 
   const [isRefAccordionOpen, { toggle: toggleIsRefAccordionOpen }] = useBoolean(false)
   const filePathTruncationLimit = 50
@@ -68,7 +71,6 @@ export const Answer = ({ answer, onCitationClicked }: Props) => {
   }, [appStateContext?.state.feedbackState, feedbackState, answer.message_id])
 
   const createCitationFilepath = (citation: Citation, index: number, truncate: boolean = false) => {
-    console.dir(citation)
     let citationFilename = ''
 
     if (citation.filepath) {
@@ -264,8 +266,8 @@ export const Answer = ({ answer, onCitationClicked }: Props) => {
             </Stack.Item>
             {answer.answer !== 'Generating answer...' ? (
               <Stack.Item>
-                <button className={styles.copyButton} onClick={() => navigator.clipboard.writeText(parsedAnswer.markdownFormatText.replace(/\s*\^\d+\^\s*/gm, ""))}>
-                  Copy
+                <button title='Copy Answer' className={styles.copyButton} onClick={() => navigator.clipboard.writeText(parsedAnswer.markdownFormatText.replace(/\s*\^\d+\^\s*/gm, ""))}>
+                  <img src={copy} className={styles.headerIcon} aria-hidden="true" alt="" />
                 </button>
               </Stack.Item>
             ) : null}
